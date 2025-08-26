@@ -25,6 +25,7 @@ const Login: React.FC<LoginProps> = ({ onLogin }) => {
                 const user: User = await response.json();
                 alert("Đăng nhập thành công!");
                 onLogin(user);
+
             } else {
                 alert("Sai username hoặc password!");
             }

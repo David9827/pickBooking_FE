@@ -1,5 +1,9 @@
-import React, { useEffect } from "react";
+import React, {useEffect, useState} from "react";
 import {
+    List,
+    ListItem,
+    ListItemAvatar,
+    ListItemText,
     Card,
     CardContent,
     Typography,
@@ -7,9 +11,10 @@ import {
     Avatar,
     Divider,
     Button,
-    TextField,
+    TextField, Box, IconButton,
 } from "@mui/material";
-import { Post, User } from "../types";
+import { Post, User, Comment } from "../types";
+import {blue} from "@mui/material/colors";
 
 interface PostListProps {
     posts: Post[];
@@ -19,14 +24,37 @@ interface PostListProps {
 
 const PostList: React.FC<PostListProps> = ({ posts, setPosts, user }) => {
     const [commentText, setCommentText] = React.useState<{ [key: number]: string }>({});
-
+    const [comments, setComments] = useState<{ [key: number]: Comment[] }>({});
     // khi component mount, fetch danh sách bài viết
-    useEffect(() => {
+/*    useEffect(() => {
         fetch("http://localhost:8080/api/posts")
             .then((res) => res.json())
-            .then((data) => setPosts(data.reverse()))
+            .then((data) => setPosts(data))
             .catch((err) => console.error("Lỗi khi tải posts:", err));
     }, [setPosts]);
+    useEffect(() => {
+        posts.forEach((post) => {
+            fetch(`http://localhost:8080/api/posts/${post.postId}/comments`)
+                .then((res) => res.json())
+                .then((data) =>
+                    setComments((prev) => ({ ...prev, [post.postId]: data }))
+                )
+                .catch((err) => console.error("Lỗi load comments:", err));
+        });
+    }, [posts]);*/
+    useEffect(() => {
+        const loadComments = async () => {
+            const results = await Promise.all(
+                posts.map((p) =>
+                    fetch(`http://localhost:8080/api/posts/${p.postId}/comments`)
+                        .then((res) => res.json())
+                        .then((data) => [p.postId, data] as const)
+                )
+            );
+            setComments(Object.fromEntries(results));
+        };
+        if (posts.length > 0) loadComments();
+    }, [posts]);
 
     // Thả reaction
     const react = (postId: number, type: string) => {
@@ -37,7 +65,7 @@ const PostList: React.FC<PostListProps> = ({ posts, setPosts, user }) => {
             .then(() =>
                 fetch("http://localhost:8080/api/posts")
                     .then((res) => res.json())
-                    .then((data) => setPosts(data.reverse()))
+                    .then((data) => setPosts(data))
             );
     };
 
@@ -55,10 +83,23 @@ const PostList: React.FC<PostListProps> = ({ posts, setPosts, user }) => {
             .then(() =>
                 fetch("http://localhost:8080/api/posts")
                     .then((res) => res.json())
-                    .then((data) => setPosts(data.reverse()))
+                    .then((data) => setPosts(data))
             );
         setCommentText((prev) => ({ ...prev, [postId]: "" }));
     };
+
+    function stringToColor(name: string): string {
+        let hash = 0;
+        for (let i = 0; i < name.length; i++) {
+            hash = name.charCodeAt(i) + ((hash << 5) - hash);
+        }
+        let color = "#";
+        for (let i = 0; i < 3; i++) {
+            const value = (hash >> (i * 8)) & 0xff;
+            color += ("00" + value.toString(16)).slice(-2);
+        }
+        return color;
+    }
 
     return (
         <div style={{ maxWidth: 600, margin: "20px auto" }}>
@@ -88,7 +129,7 @@ const PostList: React.FC<PostListProps> = ({ posts, setPosts, user }) => {
                         <Divider style={{ margin: "10px 0" }} />
 
                         {/* Nội dung bài viết */}
-                        <Typography variant="body1">{post.content}</Typography>
+                        <Typography variant="body1" style={{display: "flex", marginTop: "5px" }}>{post.content }</Typography>
 
                         {/* Ảnh nếu có */}
                         {post.imageUrl && (
@@ -102,24 +143,32 @@ const PostList: React.FC<PostListProps> = ({ posts, setPosts, user }) => {
                         )}
 
                         {/* Reaction summary */}
-                        <Typography variant="body2" color="textSecondary" style={{ marginTop: "5px" }}>
-                            👍❤️😂 {post.reactionCount || 0} · 💬 {post.commentCount || 0}
+                        <Typography variant="body2"
+                                    color="textSecondary"
+                                    display={"flex"}
+                                    style={{ marginTop: "5px" }}
+                        >
+                            {/* ❤️ {post.reactionCount || 0} · 💬 {post.commentCount || 0}*/}
+                            <span style={{ fontSize: "1.15rem" }}>❤️</span> {post.reactionCount || 0}
+                            {" · "}
+                            <span style={{ fontSize: "1.15rem" }}>💬</span> {post.commentCount || 0}
                         </Typography>
 
                         {/* Reaction bar */}
-                        <div style={{ display: "flex", gap: "5px", marginTop: "5px" }}>
-                            {["LIKE", "LOVE", "HAHA", "WOW", "ANGRY"].map((r) => (
+                        <div style={{gap: "1px", marginTop: "5px", marginLeft: "1px" }}>
+                            {["👍","❤️","😂","😮","😢","😡"].map((r) => (
                                 <Button
                                     key={r}
                                     size="small"
                                     onClick={() => react(post.postId, r)}
+                                    sx={{ minWidth: 50, padding: "2px 6px" }}
                                 >
-                                    {r}
+                                    <span style={{ fontSize: "1.2rem" }}>{r}</span>
                                 </Button>
                             ))}
                         </div>
 
-                        {/* Comment list */}
+
                         <div style={{ marginTop: "10px" }}>
                             {(post.comments || []).map((c: any, i: number) => (
                                 <Typography key={i} variant="body2">
@@ -127,6 +176,44 @@ const PostList: React.FC<PostListProps> = ({ posts, setPosts, user }) => {
                                 </Typography>
                             ))}
                         </div>
+                        {/* Comment section */}
+                        <Divider sx={{ my: 1 }} />
+                        <Typography variant="subtitle2">💬 Bình luận</Typography>
+
+                        {/* Danh sách comment */}
+                        <List>
+                            {(comments[post.postId] || []).map((c) => (
+                                <ListItem key={c.commentId} alignItems="flex-start">
+                                    <ListItemAvatar>
+                                        <Avatar
+                                            src={c.user?.avatarUrl || ""}
+                                            sx={{
+                                                width: 28,
+                                                height: 28,
+                                                bgcolor: c.user?.avatarUrl ? "transparent" : stringToColor(c.user?.username || "A"),
+                                                color: "white",
+                                                //fontWeight: "bold",
+                                            }}>
+                                            {c.user?.username?.charAt(0).toUpperCase()}
+                                        </Avatar>
+                                    </ListItemAvatar>
+                                    <ListItemText
+                                        primary={
+                                            <Box display="flex" alignItems="center" gap={1}>
+                                                <Typography variant="subtitle2" fontWeight="bold">
+                                                    {c.user?.username || "Ẩn danh"}
+                                                </Typography>
+                                                <Typography variant="caption" color="text.secondary">
+                                                    {new Date(post.createdAt).toLocaleString()}
+                                                </Typography>
+                                            </Box>
+                                        }
+                                        secondary={<Typography variant="body2">{c.content}</Typography>}
+                                    />
+                                </ListItem>
+                            ))}
+                        </List>
+
 
                         {/* Comment input */}
                         <div style={{ display: "flex", gap: "10px", marginTop: "5px" }}>
