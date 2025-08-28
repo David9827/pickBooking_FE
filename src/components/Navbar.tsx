@@ -73,7 +73,7 @@ const Navbar: React.FC = () => {
 
                 {/* Menu Icons */}
                 <Box sx={{ display: "flex", gap: 2 }}>
-                    <IconButton>
+                    <IconButton component={Link} to="/">
                         <HomeIcon />
                     </IconButton>
                     <IconButton>
@@ -82,7 +82,7 @@ const Navbar: React.FC = () => {
                     <IconButton>
                         <VideoCallIcon />
                     </IconButton>
-                    <IconButton>
+                    <IconButton component={Link} to="/myprofile">
                         <AccountCircleIcon />
                     </IconButton>
                 </Box>
