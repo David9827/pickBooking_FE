@@ -169,7 +169,7 @@ const MyProfile: React.FC<MyProfileProps> = ({ userId }) => {
                                             .charAt(0)
                                             .toUpperCase()}
                                     </Avatar>
-                                    <div>
+                                    <Box sx={{ position: "relative", padding: "8px" }}>
                                         <Typography variant="subtitle1" fontWeight="bold">
                                             {post.user.fullName || post.user.username}
                                         </Typography>
@@ -178,7 +178,13 @@ const MyProfile: React.FC<MyProfileProps> = ({ userId }) => {
                                         </Typography>
                                         {/* Nút 3 chấm */}
 
-                                        <IconButton onClick={(e) => handleMenuOpen(e, post)}>
+                                        <IconButton  onClick={(e) => handleMenuOpen(e, post)}
+                                                     sx={{
+                                                         position: "absolute",
+                                                         top: 5,
+                                                         left: 480
+                                                     }}
+                                        >
                                             <MoreVertIcon />
                                         </IconButton>
                                         <Menu
@@ -189,7 +195,7 @@ const MyProfile: React.FC<MyProfileProps> = ({ userId }) => {
                                             <MenuItem onClick={handleEdit}>✏️ Cập nhật</MenuItem>
                                             <MenuItem onClick={handleDelete}>🗑️ Xóa</MenuItem>
                                         </Menu>
-                                    </div>
+                                    </Box>
                                 </div>
 
                                 <Divider style={{ margin: "10px 0" }} />

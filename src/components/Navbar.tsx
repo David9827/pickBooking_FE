@@ -17,6 +17,7 @@ import NotificationsIcon from "@mui/icons-material/Notifications";
 import SettingsIcon from "@mui/icons-material/Settings";
 import SearchIcon from "@mui/icons-material/Search";
 import {Link} from "react-router-dom";
+import {blue} from "@mui/material/colors";
 
 const Search = styled("div")(({ theme }) => ({
     position: "relative",
@@ -73,7 +74,15 @@ const Navbar: React.FC = () => {
 
                 {/* Menu Icons */}
                 <Box sx={{ display: "flex", gap: 2 }}>
-                    <IconButton component={Link} to="/">
+                    <IconButton component={Link} to="/"
+                                sx={{
+                                    "&:hover": {
+                                        transform: "scale(1.1)",  // hiệu ứng phóng to nhẹ khi hover
+                                    },
+                                    borderRadius: 2,            // bo tròn góc (mặc định là tròn 50%)
+                                    padding: "10px"
+                                }}
+                    >
                         <HomeIcon />
                     </IconButton>
                     <IconButton>
@@ -82,20 +91,44 @@ const Navbar: React.FC = () => {
                     <IconButton>
                         <VideoCallIcon />
                     </IconButton>
-                    <IconButton component={Link} to="/myprofile">
-                        <AccountCircleIcon />
+                    <IconButton component={Link} to="/admin"
+                                sx={{
+                                    "&:hover": {
+                                        transform: "scale(1.1)",  // hiệu ứng phóng to nhẹ khi hover
+                                    },
+                                    borderRadius: 2,            // bo tròn góc (mặc định là tròn 50%)
+                                    padding: "10px"
+                                }}
+                    >
+                        <AccountCircleIcon/>
                     </IconButton>
                 </Box>
 
                 {/* Right side */}
                 <Box sx={{ display: "flex", gap: 2, alignItems: "center" }}>
-                    <IconButton>
+                    <IconButton sx={{
+                        "&:hover": {
+                            transform: "scale(1.1)",  // hiệu ứng phóng to nhẹ khi hover
+                        },
+                        borderRadius: 2,            // bo tròn góc (mặc định là tròn 50%)
+                        padding: "10px"
+                    }}>
                         <NotificationsIcon />
                     </IconButton>
-                    <IconButton>
+                    <IconButton sx={{
+                        "&:hover": {
+                            transform: "scale(1.1)",  // hiệu ứng phóng to nhẹ khi hover
+                        },
+                        borderRadius: 2,            // bo tròn góc (mặc định là tròn 50%)
+                        padding: "10px"
+                    }}>
                         <SettingsIcon />
                     </IconButton >
-                    <Avatar alt="User" src="https://i.pravatar.cc/40" component={Link} to="/admin"/>
+                    <Avatar sx={{
+                        "&:hover": {
+                            transform: "scale(1.1)",  // hiệu ứng phóng to nhẹ khi hover
+                        },
+                    }} alt="User" src="https://i.pravatar.cc/40" component={Link} to="/myprofile"/>
                 </Box>
             </Toolbar>
         </AppBar>

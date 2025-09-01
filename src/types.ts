@@ -10,6 +10,8 @@ export interface User {
     role: "USER" | "ADMIN";
     avatarUrl?: string; // thêm để hiển thị avatar
     createdAt: string;
+    //thống kê
+    userCount: number;
 }
 
 // Comment type
@@ -50,5 +52,7 @@ export interface Court {
     courtName: string;
     status: string;
     location: string;
+    //thóng kê
+    courtCount: number;
 
 }

@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from "react";
+import SendIcon from '@mui/icons-material/Send';
 import {
     List,
     ListItem,
@@ -14,7 +15,6 @@ import {
     TextField, Box, IconButton,
 } from "@mui/material";
 import { Post, User, Comment } from "../types";
-import {blue} from "@mui/material/colors";
 
 interface PostListProps {
     posts: Post[];
@@ -26,22 +26,22 @@ const PostList: React.FC<PostListProps> = ({ posts, setPosts, user }) => {
     const [commentText, setCommentText] = React.useState<{ [key: number]: string }>({});
     const [comments, setComments] = useState<{ [key: number]: Comment[] }>({});
     // khi component mount, fetch danh sách bài viết
-/*    useEffect(() => {
-        fetch("http://localhost:8080/api/posts")
-            .then((res) => res.json())
-            .then((data) => setPosts(data))
-            .catch((err) => console.error("Lỗi khi tải posts:", err));
-    }, [setPosts]);
-    useEffect(() => {
-        posts.forEach((post) => {
-            fetch(`http://localhost:8080/api/posts/${post.postId}/comments`)
+/*        useEffect(() => {
+            fetch("http://localhost:8080/api/posts")
                 .then((res) => res.json())
-                .then((data) =>
-                    setComments((prev) => ({ ...prev, [post.postId]: data }))
-                )
-                .catch((err) => console.error("Lỗi load comments:", err));
-        });
-    }, [posts]);*/
+                .then((data) => setPosts(data))
+                .catch((err) => console.error("Lỗi khi tải posts:", err));
+        }, [setPosts]);
+        useEffect(() => {
+            posts.forEach((post) => {
+                fetch(`http://localhost:8080/api/posts/${post.postId}/comments`)
+                    .then((res) => res.json())
+                    .then((data) =>
+                        setComments((prev) => ({ ...prev, [post.postId]: data }))
+                    )
+                    .catch((err) => console.error("Lỗi load comments:", err));
+            });
+        }, [posts]);*/
     useEffect(() => {
         const loadComments = async () => {
             const results = await Promise.all(
@@ -161,7 +161,12 @@ const PostList: React.FC<PostListProps> = ({ posts, setPosts, user }) => {
                                     key={r}
                                     size="small"
                                     onClick={() => react(post.postId, r)}
-                                    sx={{ minWidth: 50, padding: "2px 6px" }}
+                                    sx={{ minWidth: 50, padding: "2px 6px" ,
+                                        "&:hover": {
+                                            transform: "scale(1.15)",  // hiệu ứng phóng to nhẹ khi hover
+                                        },
+                                        borderRadius: 2,            // bo tròn góc (mặc định là tròn 50%)
+                                    }}
                                 >
                                     <span style={{ fontSize: "1.2rem" }}>{r}</span>
                                 </Button>
@@ -233,8 +238,14 @@ const PostList: React.FC<PostListProps> = ({ posts, setPosts, user }) => {
                                 variant="contained"
                                 size="small"
                                 onClick={() => addComment(post.postId)}
+                                sx={{ minWidth: 60, padding: "2px 6px" ,
+                                    "&:hover": {
+                                        transform: "scale(1.1)",  // hiệu ứng phóng to nhẹ khi hover
+                                    },
+                                    // bo tròn góc (mặc định là tròn 50%)
+                                }}
                             >
-                                Gửi
+                                <SendIcon/>
                             </Button>
                         </div>
                     </CardContent>

@@ -7,6 +7,7 @@ import {Court, User} from "../types";
 
 const AdminDashboard: React.FC = () => {
     const [courts, setCourts] = useState<Court[]>([]);
+    const [users, setUsers] = useState<User[]>([]);
 
     useEffect(() => {
         fetch("http://localhost:8081/api/admin/users")

@@ -52,7 +52,14 @@ const HomePage: React.FC<HomePageProps> = ({ user, onLogout }) => {
             <Grid container spacing={2} sx={{ marginTop: 2, paddingX: 2 }}>
                 {/* Cột trái - Sidebar menu */}
                 <Grid item xs={12} md={3}>
-                    <Box sx={{ background: "#fff", borderRadius: 2, p: 2, boxShadow: 1 }}>
+                    <Box  sx={{
+                        background: "#fff",
+                        borderRadius: 2,
+                        p: 2,
+                        boxShadow: 1,
+                        height: "calc(100vh - 80px)", // trừ phần Navbar phía trên
+                        overflowY: "auto"
+                    }}>
                         <Typography variant="subtitle1" fontWeight="bold" gutterBottom>
                             New Feeds
                         </Typography>
@@ -91,7 +98,12 @@ const HomePage: React.FC<HomePageProps> = ({ user, onLogout }) => {
 
                 {/* Cột giữa - Bài viết */}
                 <Grid item xs={12} md={6}>
-                    <Paper style={{padding: 16, textAlign: "center"}}>
+                    <Paper style={{
+                        padding: 16,
+                        textAlign: "center",
+                        height: "calc(100vh - 80px)",
+                        overflowY: "auto"
+                    }}>
                         <PostForm user={user} onPostCreated={handleNewPost} />
                         <PostList posts={posts} setPosts={setPosts} user={user} />
                     </Paper>
@@ -100,7 +112,12 @@ const HomePage: React.FC<HomePageProps> = ({ user, onLogout }) => {
                 {/* Cột phải - Contacts */}
 
                 <Grid item xs={12} md={3}>
-                    <Paper style={{padding: 16, textAlign: "center"}}>
+                    <Paper style={{
+                        padding: 16,
+                        textAlign: "center",
+                        height: "calc(100vh - 80px)",
+                        overflowY: "auto"
+                    }}>
                     <Box sx={{ background: "#fff", borderRadius: 2, p: 2, boxShadow: 1 }}>
                         <Typography variant="subtitle1" fontWeight="bold" gutterBottom>
                             Contacts
