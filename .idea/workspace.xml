@@ -6,12 +6,11 @@
   <component name="ChangeListManager">
     <list default="true" id="166f59e4-8f1f-46f8-bda1-5d5e7e19e11a" name="Changes" comment="post and manager for admin">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/AdminDashboard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/AdminDashboard.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/MyProfile.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/MyProfile.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Navbar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Navbar.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/PostList.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/PostList.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/HomePage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/HomePage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/types.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -175,7 +174,11 @@
       <workItem from="1756230772319" duration="551000" />
       <workItem from="1756278100154" duration="7921000" />
       <workItem from="1756388662731" duration="4173000" />
-      <workItem from="1756697854238" duration="6522000" />
+      <workItem from="1756697854238" duration="7887000" />
+      <workItem from="1756717716429" duration="1237000" />
+      <workItem from="1756743449817" duration="2845000" />
+      <workItem from="1757069717419" duration="652000" />
+      <workItem from="1757215573657" duration="6723000" />
     </task>
     <task id="LOCAL-00001" summary="Feed in HomePage">
       <option name="closed" value="true" />
@@ -209,7 +212,15 @@
       <option name="project" value="LOCAL" />
       <updated>1756391391463</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="post and manager for admin">
+      <option name="closed" value="true" />
+      <created>1756714361508</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1756714361508</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

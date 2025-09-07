@@ -4,6 +4,7 @@ import {Box, Typography, List, ListItem, ListItemIcon, ListItemText, Avatar, Div
 import Navbar from "../components/Navbar";
 import PostForm from "../components/PostForm";
 import PostList from "../components/PostList";
+import SearchBar from "../components/SearchBar";
 import AdminSidebar from "../components/AdminSidebar";
 import UserTable from "../components/UserTable";
 import ListItemButton from "@mui/material/ListItemButton"
@@ -48,7 +49,6 @@ const HomePage: React.FC<HomePageProps> = ({ user, onLogout }) => {
             {/* Navbar ngang */}
 
             <Navbar />
-
             <Grid container spacing={2} sx={{ marginTop: 2, paddingX: 2 }}>
                 {/* Cột trái - Sidebar menu */}
                 <Grid item xs={12} md={3}>

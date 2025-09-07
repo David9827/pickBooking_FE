@@ -139,6 +139,13 @@ const PostList: React.FC<PostListProps> = ({ posts, setPosts, user }) => {
                                 image={post.imageUrl}
                                 alt="Post image"
                                 style={{ marginTop: "10px", borderRadius: "10px" }}
+                                sx={{
+                                    mt: 1,
+                                    borderRadius: 2,
+                                    width: "100%",
+                                    height: 300,
+                                    objectFit: "cover"
+                                }}
                             />
                         )}
 

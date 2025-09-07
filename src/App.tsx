@@ -27,7 +27,6 @@ const App: React.FC = () => {
             {/* Trang chủ, truyền user & hàm logout */}
             <Route path="/" element={<HomePage user={user} onLogout={() => setUser(null)} />} />
 
-
             {/* admin page*/}
             <Route path="/admin" element={<AdminSidebar />} />
             {/* Trang quản lý users */}
