@@ -12,10 +12,17 @@ import { User } from "../types";
 interface FriendListProps {
     userId: number; // user hiện tại
 }
+interface Friendship {
+    id: number;
+    sender: User;
+    receiver: User;
+    status: string; // PENDING, ACCEPTED
+}
 
 const FriendList: React.FC<FriendListProps> = ({ userId }) => {
     const [friends, setFriends] = useState<User[]>([]);
     const [loading, setLoading] = useState(true);
+
 
     useEffect(() => {
         fetch(`http://localhost:8082/api/friends/${userId}`)
@@ -49,7 +56,9 @@ const FriendList: React.FC<FriendListProps> = ({ userId }) => {
                     <Card key={friend.userId} sx={{ mb: 2 }}>
                         <CardContent sx={{ display: "flex", alignItems: "center", gap: 2 }}>
                             <Avatar src={friend.avatarUrl || ""}>
-                                {!friend.avatarUrl ? friend.username.charAt(0).toUpperCase() : ""}
+                                {!friend.avatarUrl && friend.username
+                                    ? String(friend.username).charAt(0).toUpperCase()
+                                    : ""}
                             </Avatar>
                             <Box>
                                 <Typography fontWeight="bold">

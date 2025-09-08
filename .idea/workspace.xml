@@ -4,16 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="166f59e4-8f1f-46f8-bda1-5d5e7e19e11a" name="Changes" comment="search func">
+    <list default="true" id="166f59e4-8f1f-46f8-bda1-5d5e7e19e11a" name="Changes" comment="friendList">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/AdminDashboard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/AdminDashboard.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/FriendList.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/FriendList.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/FriendRequests.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/FriendRequests.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/MyProfile.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/MyProfile.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Navbar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Navbar.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/HomePage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/HomePage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/types.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -183,6 +176,7 @@
       <workItem from="1757069717419" duration="652000" />
       <workItem from="1757215573657" duration="17502000" />
       <workItem from="1757262074295" duration="2952000" />
+      <workItem from="1757323334454" duration="3879000" />
     </task>
     <task id="LOCAL-00001" summary="Feed in HomePage">
       <option name="closed" value="true" />
@@ -232,7 +226,15 @@
       <option name="project" value="LOCAL" />
       <updated>1757226244092</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="friendList">
+      <option name="closed" value="true" />
+      <created>1757323458475</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1757323458475</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -247,6 +249,7 @@
     <MESSAGE value="Feed in HomePage" />
     <MESSAGE value="post and manager for admin" />
     <MESSAGE value="search func" />
-    <option name="LAST_COMMIT_MESSAGE" value="search func" />
+    <MESSAGE value="friendList" />
+    <option name="LAST_COMMIT_MESSAGE" value="friendList" />
   </component>
 </project>
