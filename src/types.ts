@@ -56,3 +56,9 @@ export interface Court {
     courtCount: number;
 
 }
+export interface FriendShips {
+    friendshipId: number;
+    senderId: number;
+    receiverId: number
+}
+

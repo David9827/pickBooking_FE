@@ -18,7 +18,7 @@ const FriendList: React.FC<FriendListProps> = ({ userId }) => {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        fetch(`http://localhost:8082/api/friends/list/${userId}`)
+        fetch(`http://localhost:8082/api/friends/${userId}`)
             .then((res) => res.json())
             .then((data) => {
                 setFriends(data);
@@ -59,6 +59,7 @@ const FriendList: React.FC<FriendListProps> = ({ userId }) => {
                                     📧 {friend.email}
                                 </Typography>
                             </Box>
+
                         </CardContent>
                     </Card>
                 ))

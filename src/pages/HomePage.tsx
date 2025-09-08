@@ -104,6 +104,7 @@ const HomePage: React.FC<HomePageProps> = ({ user, onLogout }) => {
                         height: "calc(100vh - 80px)",
                         overflowY: "auto"
                     }}>
+
                         <PostForm user={user} onPostCreated={handleNewPost} />
                         <PostList posts={posts} setPosts={setPosts} user={user} />
                     </Paper>

@@ -10,6 +10,7 @@ import AdminSidebar from "./components/AdminSidebar";
 import CourtManagement from "./components/CourtManagement";
 import AdminDashboard from "./components/AdminDashboard";
 import MyProfile from "./components/MyProfile";
+import UserProfile from "./components/UserProfile";
 
 const App: React.FC = () => {
     const [user, setUser] = useState<User | null>(null);
@@ -39,6 +40,9 @@ const App: React.FC = () => {
             <Route path="/myprofile" element={<MyProfile userId={user.userId} />} />
             {/* Nếu vào đường dẫn khác → chuyển về Home */}
             <Route path="*" element={<Navigate to="/" />} />
+            {/* truyền vào userPrf */}
+            <Route path="/profile/:userId" element={<UserProfile />} />
+
         </Routes>
     );
    // return <HomePage user={user} onLogout={() => setUser(null)} />;

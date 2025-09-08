@@ -24,7 +24,7 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import SettingsIcon from "@mui/icons-material/Settings";
 import SearchIcon from "@mui/icons-material/Search";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 
 const Search = styled("div")(({ theme }) => ({
     position: "relative",
@@ -64,6 +64,7 @@ const Navbar: React.FC = () => {
         users: [],
         posts: [],
     });
+    const navigate = useNavigate();
 
     const handleSearch = async (e: React.KeyboardEvent<HTMLInputElement>) => {
         if (e.key === "Enter" && keyword.trim() !== "") {
@@ -83,6 +84,7 @@ const Navbar: React.FC = () => {
                 <Typography
                     variant="h6"
                     sx={{ fontWeight: "bold", color: "#2C7BE5" }}
+                    onClick={() => navigate("/")}
                 >
                     PICKBooking
                 </Typography>
@@ -122,7 +124,11 @@ const Navbar: React.FC = () => {
                                     <Typography variant="subtitle1">👥 Người dùng</Typography>
                                     <List>
                                         {results.users.map((u) => (
-                                            <ListItem key={u.userId} button>
+                                            <ListItem
+                                                  key={u.userId}
+                                                  button
+                                                  onClick={() => navigate(`/profile/${u.userId}`)}
+                                            >
                                                 <ListItemAvatar>
                                                     <Avatar src={u.avatarUrl || ""}>
                                                         {!u.avatarUrl &&

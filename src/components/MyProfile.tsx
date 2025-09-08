@@ -20,6 +20,7 @@ import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { User, Post } from "../types";
 import FriendList from "../components/FriendList";
 import FriendRequests from "../components/FriendRequests";
+import {useNavigate} from "react-router-dom";
 
 interface MyProfileProps {
     userId: number; // ID user hiện tại
@@ -34,7 +35,7 @@ const MyProfile: React.FC<MyProfileProps> = ({ userId }) => {
     const [tab, setTab] = useState(0);
 
     const open = Boolean(anchorEl);
-
+    const navigate = useNavigate();
     const handleMenuOpen = (
         event: React.MouseEvent<HTMLButtonElement>,
         post: Post
@@ -63,6 +64,12 @@ const MyProfile: React.FC<MyProfileProps> = ({ userId }) => {
         // TODO: mở modal chỉnh sửa
         handleMenuClose();
     };
+    const handlAddFriends = async () =>{
+        await fetch(`http://localhost:8080/api/${userId}/requests`,
+        {
+            method: "GET"
+        });
+    };
 
     useEffect(() => {
         // Gọi API lấy thông tin user
@@ -77,6 +84,7 @@ const MyProfile: React.FC<MyProfileProps> = ({ userId }) => {
                 setLoading(false);
             });
 
+
         // Gọi API lấy bài viết user
         fetch(`http://localhost:8080/api/posts/userId/${userId}`)
             .then((res) => res.json())
@@ -89,6 +97,8 @@ const MyProfile: React.FC<MyProfileProps> = ({ userId }) => {
                 setLoading(false);
             });
     }, [userId]);
+
+
 
     if (loading) {
         return (
@@ -145,12 +155,22 @@ const MyProfile: React.FC<MyProfileProps> = ({ userId }) => {
                         </Grid>
                     </Grid>
                 </CardContent>
+                <Box display="flex" justifyContent="flex-end" gap={2} mt={2}>
+                    <Button variant="outlined" color="primary">
+                        Chỉnh sửa thông tin
+                    </Button>
+                    <Button variant="contained" color="error" onClick={() => navigate(`/`)}>
+
+                        Đăng xuất
+                    </Button>
+                </Box>
 
                 {/* Tabs */}
                 <Tabs value={tab} onChange={(_, v) => setTab(v)} sx={{ mb: 2 }}>
                     <Tab label="Bài viết" />
                     <Tab label="Bạn bè" />
-                    <Tab label="Lời mời kết bạn" />
+                    <Tab label="Lời mời kết bạn"/>
+
                 </Tabs>
 
                 {/* Nội dung Tabs */}
@@ -219,6 +239,13 @@ const MyProfile: React.FC<MyProfileProps> = ({ userId }) => {
                                             image={post.imageUrl}
                                             alt="Post image"
                                             style={{ marginTop: "10px", borderRadius: "10px" }}
+                                            sx={{
+                                                mt: 1,
+                                                borderRadius: 2,
+                                                width: "100%",
+                                                height: 300,
+                                                objectFit: "cover"
+                                            }}
                                         />
                                     )}
 
@@ -243,14 +270,6 @@ const MyProfile: React.FC<MyProfileProps> = ({ userId }) => {
                 {tab === 1 && <FriendList userId={userId} />}
                 {tab === 2 && <FriendRequests userId={userId} />}
 
-                <Box display="flex" justifyContent="flex-end" gap={2} mt={2}>
-                    <Button variant="outlined" color="primary">
-                        Chỉnh sửa thông tin
-                    </Button>
-                    <Button variant="contained" color="error">
-                        Đăng xuất
-                    </Button>
-                </Box>
             </Card>
         </Box>
     );
