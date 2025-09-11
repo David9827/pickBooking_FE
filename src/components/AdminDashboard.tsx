@@ -9,7 +9,6 @@ const AdminDashboard: React.FC = () => {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        // TODO: kiểm tra lại port (8080 hay 8081) cho đúng backend của bạn
         const USERS_API = "http://localhost:8081/api/admin/users";
         const COURTS_API = "http://localhost:8081/api/admin/courts";
 
