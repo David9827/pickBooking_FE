@@ -1,3 +1,4 @@
+// src/components/FriendList.tsx
 import React, { useEffect, useState } from "react";
 import {
     Avatar,
@@ -5,6 +6,10 @@ import {
     Card,
     CardContent,
     CircularProgress,
+    List,
+    ListItem,
+    ListItemAvatar,
+    ListItemText,
     Typography,
 } from "@mui/material";
 import { User } from "../types";
@@ -12,68 +17,94 @@ import { User } from "../types";
 interface FriendListProps {
     userId: number; // user hiện tại
 }
+
 interface Friendship {
     id: number;
     sender: User;
     receiver: User;
-    status: string; // PENDING, ACCEPTED
+    status: "PENDING" | "ACCEPTED";
 }
 
 const FriendList: React.FC<FriendListProps> = ({ userId }) => {
     const [friends, setFriends] = useState<User[]>([]);
     const [loading, setLoading] = useState(true);
 
-
     useEffect(() => {
+        let mounted = true;
+        setLoading(true);
+
         fetch(`http://localhost:8082/api/friends/${userId}`)
             .then((res) => res.json())
-            .then((data) => {
-                setFriends(data);
-                setLoading(false);
+            .then((data: Friendship[]) => {
+                if (!mounted) return;
+
+                const accepted = Array.isArray(data)
+                    ? data.filter((f) => f?.status === "ACCEPTED")
+                    : [];
+
+                // Lấy "đầu kia" của quan hệ bạn bè
+                const list = accepted
+                    .map((f) => (f.sender?.userId === userId ? f.receiver : f.sender))
+                    .filter(Boolean) as User[];
+
+                setFriends(list);
             })
             .catch((err) => {
                 console.error("Lỗi load friends:", err);
-                setLoading(false);
-            });
+                setFriends([]);
+            })
+            .finally(() => mounted && setLoading(false));
+
+        return () => {
+            mounted = false;
+        };
     }, [userId]);
+
+    // Tên hiển thị an toàn
+    const displayName = (u: User) =>
+        (u?.fullName && u.fullName.trim().length > 0
+            ? u.fullName
+            : u?.username) || "Người dùng";
+
+    // Lấy chữ cái đầu an toàn (không còn lỗi charAt)
+    const firstLetter = (u: User) => displayName(u).charAt(0).toUpperCase();
 
     if (loading) {
         return (
-            <Box display="flex" justifyContent="center" mt={2}>
+            <Box sx={{ p: 2, display: "flex", justifyContent: "center" }}>
                 <CircularProgress />
             </Box>
         );
     }
 
     return (
-        <Box>
-            {friends.length === 0 ? (
-                <Typography variant="body1" color="text.secondary">
-                    Bạn chưa có bạn bè nào
+        <Card sx={{ mt: 2 }}>
+            <CardContent>
+                <Typography variant="h6" gutterBottom>
+                    Bạn bè
                 </Typography>
-            ) : (
-                friends.map((friend) => (
-                    <Card key={friend.userId} sx={{ mb: 2 }}>
-                        <CardContent sx={{ display: "flex", alignItems: "center", gap: 2 }}>
-                            <Avatar src={friend.avatarUrl || ""}>
-                                {!friend.avatarUrl && friend.username
-                                    ? String(friend.username).charAt(0).toUpperCase()
-                                    : ""}
-                            </Avatar>
-                            <Box>
-                                <Typography fontWeight="bold">
-                                    {friend.fullName || friend.username}
-                                </Typography>
-                                <Typography variant="body2" color="text.secondary">
-                                    📧 {friend.email}
-                                </Typography>
-                            </Box>
 
-                        </CardContent>
-                    </Card>
-                ))
-            )}
-        </Box>
+                {friends.length === 0 ? (
+                    <Typography variant="body2" color="text.secondary">
+                        Chưa có bạn bè được chấp nhận.
+                    </Typography>
+                ) : (
+                    <List dense>
+                        {friends.map((f) => (
+                            <ListItem key={f.userId}>
+                                <ListItemAvatar>
+                                    <Avatar>{firstLetter(f)}</Avatar>
+                                </ListItemAvatar>
+                                <ListItemText
+                                    primary={displayName(f)}
+                                    secondary={f?.email || ""}
+                                />
+                            </ListItem>
+                        ))}
+                    </List>
+                )}
+            </CardContent>
+        </Card>
     );
 };
 

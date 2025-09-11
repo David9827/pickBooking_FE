@@ -4,17 +4,16 @@ import {Box, Typography, List, ListItem, ListItemIcon, ListItemText, Avatar, Div
 import Navbar from "../components/Navbar";
 import PostForm from "../components/PostForm";
 import PostList from "../components/PostList";
-import SearchBar from "../components/SearchBar";
-import AdminSidebar from "../components/AdminSidebar";
-import UserTable from "../components/UserTable";
+
 import ListItemButton from "@mui/material/ListItemButton"
 import { User, Post } from "../types";
 import Grid from '@mui/material/Grid';
 import Paper from "@mui/material/Paper";
 import { useNavigate } from "react-router-dom";
-import { Button } from "@mui/material";
+
 
 import HomeIcon from "@mui/icons-material/Home";
+
 
 // Giả lập dữ liệu bạn bè bên phải
 const contacts = [
@@ -98,6 +97,7 @@ const HomePage: React.FC<HomePageProps> = ({ user, onLogout }) => {
 
                 {/* Cột giữa - Bài viết */}
                 <Grid item xs={12} md={6}>
+
                     <Paper style={{
                         padding: 16,
                         textAlign: "center",
@@ -106,9 +106,12 @@ const HomePage: React.FC<HomePageProps> = ({ user, onLogout }) => {
                     }}>
 
                         <PostForm user={user} onPostCreated={handleNewPost} />
+
                         <PostList posts={posts} setPosts={setPosts} user={user} />
                     </Paper>
+
                 </Grid>
+
 
                 {/* Cột phải - Contacts */}
 

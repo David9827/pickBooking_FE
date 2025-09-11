@@ -65,7 +65,7 @@ const MyProfile: React.FC<MyProfileProps> = ({ userId }) => {
         handleMenuClose();
     };
     const handlAddFriends = async () =>{
-        await fetch(`http://localhost:8080/api/${userId}/requests`,
+        await fetch(`http://localhost:8081/api/${userId}/requests`,
         {
             method: "GET"
         });
@@ -161,7 +161,7 @@ const MyProfile: React.FC<MyProfileProps> = ({ userId }) => {
                     </Button>
                     <Button variant="contained" color="error" onClick={() => navigate(`/`)}>
 
-                        Đăng xuất
+                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#FFFFFF"><path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h280v80H200v560h280v80H200Zm440-160-55-58 102-102H360v-80h327L585-622l55-58 200 200-200 200Z"/></svg> Đăng xuất
                     </Button>
                 </Box>
 

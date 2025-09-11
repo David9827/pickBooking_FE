@@ -5,8 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="166f59e4-8f1f-46f8-bda1-5d5e7e19e11a" name="Changes" comment="friendList">
+      <change afterPath="$PROJECT_DIR$/src/components/StoriesBar.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/CourtManagement.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/CourtManagement.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/FriendList.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/FriendList.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/FriendRequests.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/FriendRequests.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/MyProfile.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/MyProfile.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/HomePage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/HomePage.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -176,7 +183,8 @@
       <workItem from="1757069717419" duration="652000" />
       <workItem from="1757215573657" duration="17502000" />
       <workItem from="1757262074295" duration="2952000" />
-      <workItem from="1757323334454" duration="3879000" />
+      <workItem from="1757323334454" duration="13310000" />
+      <workItem from="1757561927301" duration="729000" />
     </task>
     <task id="LOCAL-00001" summary="Feed in HomePage">
       <option name="closed" value="true" />
@@ -234,7 +242,15 @@
       <option name="project" value="LOCAL" />
       <updated>1757323458475</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="friendList">
+      <option name="closed" value="true" />
+      <created>1757327574248</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1757327574248</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

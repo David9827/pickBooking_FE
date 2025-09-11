@@ -11,9 +11,7 @@ import {
     TableBody,
     IconButton, Menu, MenuItem
 } from "@mui/material";
-import {Post} from "../types";
-import {Delete} from "@mui/icons-material";
-import {red} from "@mui/material/colors";
+
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 
 interface Court {
